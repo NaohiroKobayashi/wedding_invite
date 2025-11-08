@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Prompt:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__label">Wedding Invitation</p>
+      <h1 class="hero__title">Yuna &amp; Haruto</h1>
+      <p class="hero__subtitle">2024年10月12日 - 星の見える丘のチャペルにて</p>
+      <a class="hero__cta" href="#rsvp">ご出席の連絡はこちら</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="intro__card">
+        <h2>ごあいさつ</h2>
+        <p>
+          この度、私たちは皆さまに見守られながら新しい家族として歩み始めることになりました。
+          心からの感謝とともに、特別な一日をご一緒できれば幸いです。
+        </p>
+      </div>
+      <div class="intro__card">
+        <h2>会場の雰囲気</h2>
+        <p>
+          森に囲まれたチャペルで、日暮れとともにライトアップされたガーデンパーティを予定しています。
+          ドレスコードは「星空に映える色」。きらりと輝く小物を添えてご参加ください。
+        </p>
+      </div>
+    </section>
+
+    <section class="schedule" id="schedule">
+      <h2>当日のスケジュール</h2>
+      <div class="timeline">
+        <div class="timeline__item">
+          <span class="timeline__time">15:30</span>
+          <div class="timeline__content">
+            <h3>受付開始</h3>
+            <p>チャペル入口にてお出迎えいたします。ウェルカムドリンクでひと息どうぞ。</p>
+          </div>
+        </div>
+        <div class="timeline__item">
+          <span class="timeline__time">16:30</span>
+          <div class="timeline__content">
+            <h3>挙式</h3>
+            <p>夕暮れの光に包まれながら、家族と友人の前で誓いを立てます。</p>
+          </div>
+        </div>
+        <div class="timeline__item">
+          <span class="timeline__time">18:00</span>
+          <div class="timeline__content">
+            <h3>ガーデンパーティ</h3>
+            <p>星空と灯りの中で、音楽とともにゆったりとした時間をお楽しみください。</p>
+          </div>
+        </div>
+        <div class="timeline__item">
+          <span class="timeline__time">20:00</span>
+          <div class="timeline__content">
+            <h3>おひらき</h3>
+            <p>最後にお土産をご用意しております。お気をつけてお帰りください。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="meet" id="meet">
+      <h2>新郎新婦をご紹介</h2>
+      <p class="meet__subtitle">写真にフォーカスすると、ふたりからのひとことが飛び出します。</p>
+      <div class="meet__grid">
+        <article class="meet-card" tabindex="0" data-message="いつも支えてくれてありがとう。これからも一緒に笑っていきましょう。">
+          <div class="meet-card__image">
+            <img src="https://images.unsplash.com/photo-1520854221050-0f4caff449fb?auto=format&fit=crop&w=500&q=80" alt="新婦 Yuna" />
+          </div>
+          <h3>Yuna</h3>
+          <p class="meet-card__role">新婦 / デザイナー</p>
+        </article>
+        <article class="meet-card" tabindex="0" data-message="大切な人たちに囲まれて迎えるこの日を、とても楽しみにしています。">
+          <div class="meet-card__image">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80" alt="新郎 Haruto" />
+          </div>
+          <h3>Haruto</h3>
+          <p class="meet-card__role">新郎 / エンジニア</p>
+        </article>
+      </div>
+      <div class="speech-bubble" aria-hidden="true"></div>
+    </section>
+
+    <section class="access" id="access">
+      <h2>アクセス</h2>
+      <div class="access__grid">
+        <div>
+          <h3>星の見える丘のチャペル</h3>
+          <p>〒123-4567 東京都どこかの丘 1-2-3</p>
+          <p>最寄駅：星見ヶ丘駅（徒歩10分）</p>
+          <p>シャトルバス：15:00より30分間隔で運行</p>
+        </div>
+        <div class="access__map">
+          <iframe
+            title="会場周辺地図"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.953121280769!2d139.69170631525805!3d35.68948752413156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQxJzIyLjIiTiAxMznCsDQxJzI5LjAiRQ!5e0!3m2!1sja!2sjp!4v1616582389304!5m2!1sja!2sjp"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="rsvp" id="rsvp">
+      <h2>ご出欠のお知らせ</h2>
+      <p>
+        出欠のご連絡はGoogleフォームよりお願いいたします。
+        アレルギーやご要望があれば備考欄にご記入ください。
+      </p>
+      <a class="rsvp__button" href="https://forms.gle/" target="_blank" rel="noopener">Googleフォームを開く</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2024 Yuna &amp; Haruto Wedding</p>
+  </footer>
+
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
