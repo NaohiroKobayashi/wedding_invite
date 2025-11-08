@@ -1,1 +1,2 @@
 # wedding_invite
+結婚式に向けたweb招待状を自作する
