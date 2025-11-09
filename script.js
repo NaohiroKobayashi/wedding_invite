@@ -1,73 +1,110 @@
-const cards = document.querySelectorAll('.meet-card');
-const bubble = document.querySelector('.speech-bubble');
-const glow = document.querySelector('.cursor-glow');
+document.addEventListener('DOMContentLoaded', () => {
+  // --- Speech Bubble Logic for Keyboard Navigation ---
+  const cards = document.querySelectorAll('.meet-card');
 
-function positionBubble(target) {
-  const rect = target.getBoundingClientRect();
-  const bubbleRect = bubble.getBoundingClientRect();
-  const x = rect.left + rect.width / 2 - bubbleRect.width / 2;
-  const y = rect.top - bubbleRect.height - 16;
-  bubble.style.transformOrigin = 'bottom center';
-  bubble.style.left = `${Math.max(16, x)}px`;
-  bubble.style.top = `${Math.max(window.scrollY + 80, window.scrollY + y)}px`;
-}
+  cards.forEach((card) => {
+    // When the card receives focus (e.g., via Tab key)
+    card.addEventListener('focus', () => {
+      card.classList.add('is-focused');
+    });
 
-function showMessage(event) {
-  const target = event.currentTarget;
-  const message = target.dataset.message;
-  bubble.textContent = message;
-  bubble.classList.add('is-visible');
-  positionBubble(target);
-}
+    // When the card loses focus
+    card.addEventListener('blur', () => {
+      card.classList.remove('is-focused');
+    });
+  });
 
-function hideMessage() {
-  bubble.classList.remove('is-visible');
-}
+  // --- Photo Modal Logic ---
+  const modal = document.querySelector('.photo-modal');
+  if (modal) {
+    const modalImage = modal.querySelector('.photo-modal__content img');
+    const closeModalButton = modal.querySelector('.photo-modal__close');
+    const backdrop = modal.querySelector('.photo-modal__backdrop');
+    const tappableImages = document.querySelectorAll('.meet-card__image');
 
-cards.forEach((card) => {
-  card.addEventListener('mouseenter', showMessage);
-  card.addEventListener('focus', showMessage);
-  card.addEventListener('mouseleave', hideMessage);
-  card.addEventListener('blur', hideMessage);
-});
+    const openModal = (imgSrc) => {
+      modalImage.setAttribute('src', imgSrc);
+      modal.classList.add('is-visible');
+      document.body.classList.add('modal-is-open');
+    };
 
-window.addEventListener('scroll', () => {
-  if (!bubble.classList.contains('is-visible')) return;
-  const active = document.querySelector('.meet-card:hover, .meet-card:focus');
-  if (active) {
-    positionBubble(active);
+    const closeModal = () => {
+      modal.classList.remove('is-visible');
+      document.body.classList.remove('modal-is-open');
+    };
+
+    tappableImages.forEach((imgContainer) => {
+      imgContainer.addEventListener('click', () => {
+        const imgSrc = imgContainer.querySelector('img').getAttribute('src');
+        openModal(imgSrc);
+      });
+    });
+
+    closeModalButton.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', closeModal);
   }
-});
 
-window.addEventListener('resize', () => {
-  if (!bubble.classList.contains('is-visible')) return;
-  const active = document.querySelector('.meet-card:hover, .meet-card:focus');
-  if (active) {
-    positionBubble(active);
+  // --- Confetti on Page Load ---
+  if (typeof confetti === 'function') {
+    const duration = 3 * 1000; // Animation duration in milliseconds
+    const animationEnd = Date.now() + duration;
+    const colors = ['#e8c8ff', '#b597ff', '#fdf9f2', '#ffffff'];
+
+    const randomInRange = (min, max) => Math.random() * (max - min) + min;
+
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      const particleCount = 50 * (timeLeft / duration);
+      // Launch confetti from both sides
+      confetti({
+        startVelocity: 30,
+        spread: 360,
+        ticks: 60,
+        zIndex: 0,
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+        colors: colors,
+      });
+      confetti({
+        startVelocity: 30,
+        spread: 360,
+        ticks: 60,
+        zIndex: 0,
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+        colors: colors,
+      });
+    }, 250);
   }
-});
 
-window.addEventListener('mousemove', (event) => {
-  if (!glow) return;
-  glow.style.left = `${event.clientX}px`;
-  glow.style.top = `${event.clientY}px`;
-  glow.style.opacity = 1;
-});
+  // --- Original Cursor Glow Logic ---
+  const glow = document.querySelector('.cursor-glow');
 
-window.addEventListener('mouseleave', () => {
-  if (!glow) return;
-  glow.style.opacity = 0;
-});
+  if (glow) {
+    window.addEventListener('mousemove', (event) => {
+      glow.style.left = `${event.clientX}px`;
+      glow.style.top = `${event.clientY}px`;
+      glow.style.opacity = 1;
+    });
 
-window.addEventListener('touchmove', (event) => {
-  if (!glow) return;
-  const touch = event.touches[0];
-  glow.style.left = `${touch.clientX}px`;
-  glow.style.top = `${touch.clientY}px`;
-  glow.style.opacity = 0.4;
-});
+    window.addEventListener('mouseleave', () => {
+      glow.style.opacity = 0;
+    });
 
-window.addEventListener('touchend', () => {
-  if (!glow) return;
-  glow.style.opacity = 0;
+    window.addEventListener('touchmove', (event) => {
+      const touch = event.touches[0];
+      glow.style.left = `${touch.clientX}px`;
+      glow.style.top = `${touch.clientY}px`;
+      glow.style.opacity = 0.4;
+    });
+
+    window.addEventListener('touchend', () => {
+      glow.style.opacity = 0;
+    });
+  }
 });
