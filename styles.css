@@ -1,12 +1,12 @@
 :root {
-  --bg: #fdf9f2;
-  --accent: #e8c8ff;
-  --accent-strong: #b597ff;
-  --text: #3a2e2d;
-  --text-muted: rgba(58, 46, 45, 0.72);
+  --bg: #fdfcf7;
+  --accent: #f2c0b5;
+  --accent-strong: #d9534f;
+  --text: #333333;
+  --text-muted: rgba(51, 51, 51, 0.7);
   --card-bg: rgba(255, 255, 255, 0.9);
-  --shadow: 0 25px 50px -20px rgba(60, 40, 80, 0.35);
-  --radius: 22px;
+  --shadow: 0 15px 40px -15px rgba(51, 51, 51, 0.2);
+  --radius: 10px;
 }
 
 * {
@@ -15,9 +15,9 @@
 
 body {
   margin: 0;
-  font-family: 'Prompt', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  font-family: 'Noto Serif JP', sans-serif;
   color: var(--text);
-  background: var(--bg);
+  background-color: var(--bg);
   line-height: 1.7;
 }
 
@@ -31,9 +31,9 @@ img {
 }
 
 h1,
- h2,
- h3 {
-  font-family: 'Playfair Display', 'Yu Mincho', serif;
+h2,
+h3 {
+  font-family: 'Noto Serif JP', serif;
   font-weight: 600;
   margin: 0 0 0.5em;
 }
@@ -54,14 +54,35 @@ p {
   background-position: center;
   color: #fff;
   padding: 5rem 1.5rem 6rem;
+  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+}
+
+.hero::before,
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  border-color: rgba(255, 255, 255, 0.7);
+  border-style: solid;
+}
+
+.hero::before {
+  top: 2rem;
+  left: 2rem;
+  border-width: 3px 0 0 3px;
+}
+
+.hero::after {
+  bottom: 2rem;
+  right: 2rem;
+  border-width: 0 3px 3px 0;
 }
 
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(232, 200, 255, 0.35), transparent 50%),
-    radial-gradient(circle at 80% 15%, rgba(255, 240, 207, 0.35), transparent 55%);
-  mix-blend-mode: screen;
+  background: radial-gradient(circle at 80% 15%, rgba(255, 240, 207, 0.25), transparent 55%);
   pointer-events: none;
 }
 
@@ -70,9 +91,11 @@ p {
   max-width: 720px;
   padding: 2rem 2.5rem;
   border-radius: var(--radius);
-  background: rgba(30, 20, 50, 0.35);
+  background: rgba(255, 255, 255, 0.35);
   backdrop-filter: blur(8px);
   box-shadow: var(--shadow);
+  color: var(--text);
+  animation: fadeInUp 0.8s 0.5s backwards ease-out;
 }
 
 .hero__label {
@@ -101,18 +124,18 @@ p {
   gap: 0.6rem;
   padding: 0.95rem 2.6rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, rgba(232, 200, 255, 0.9), rgba(255, 234, 200, 0.9));
-  color: #3a2e2d;
+  background: var(--accent-strong);
+  color: #fff;
   font-weight: 600;
   text-decoration: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 20px 30px -20px rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 25px -10px var(--accent-strong);
 }
 
 .hero__cta:hover,
 .hero__cta:focus-visible {
   transform: translateY(-4px);
-  box-shadow: 0 28px 45px -20px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 18px 35px -15px var(--accent-strong);
 }
 
 main {
@@ -139,26 +162,60 @@ section {
   overflow: hidden;
 }
 
+.intro__card:not(.intro__card--venue) {
+  background: url('https://stat.ameba.jp/user_images/20250310/23/migomigo7/36/9e/j/o1000100015553203526.jpg') repeat-y center top/100% auto;
+}
+
 .intro__card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top right, rgba(232, 200, 255, 0.3), transparent 50%);
+  background: radial-gradient(circle at top right, var(--accent) 0%, transparent 50%);
   opacity: 0;
   transition: opacity 0.4s ease;
 }
 
 .intro__card:hover::before {
-  opacity: 1;
+  opacity: 0.5;
 }
 
 .schedule h2,
 .meet h2,
 .access h2,
 .rsvp h2 {
+  display: flex;
+  align-items: center;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   letter-spacing: 0.08em;
+}
+
+.schedule h2::before,
+.schedule h2::after,
+.meet h2::before,
+.meet h2::after,
+.access h2::before,
+.access h2::after,
+.rsvp h2::before,
+.rsvp h2::after {
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  background: var(--accent);
+}
+
+.schedule h2::before,
+.meet h2::before,
+.access h2::before,
+.rsvp h2::before {
+  margin-right: 1.5rem;
+}
+
+.schedule h2::after,
+.meet h2::after,
+.access h2::after,
+.rsvp h2::after {
+  margin-left: 1.5rem;
 }
 
 .timeline {
@@ -166,6 +223,7 @@ section {
   display: grid;
   gap: 2rem;
   padding-left: clamp(1rem, 4vw, 3rem);
+  text-align: left;
 }
 
 .timeline::before {
@@ -175,7 +233,7 @@ section {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, rgba(232, 200, 255, 0.8), rgba(181, 151, 255, 0.8));
+  background: var(--accent);
 }
 
 .timeline__item {
@@ -196,16 +254,16 @@ section {
 
 .timeline__content {
   padding: 1.2rem 1.6rem;
-  background: var(--card-bg);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  background: url('https://stat.ameba.jp/user_images/20250310/23/migomigo7/36/9e/j/o1000100015553203526.jpg') repeat-y center top/100% auto;
 }
 
 .meet__subtitle {
   text-align: center;
   color: var(--text-muted);
   max-width: 640px;
-  margin: 0 auto 2.5rem;
+  margin: -1.5rem auto 2.5rem;
 }
 
 .meet__grid {
@@ -221,7 +279,6 @@ section {
 
 .meet-card {
   position: relative;
-  background: var(--card-bg);
   border-radius: calc(var(--radius) + 6px);
   padding: 2.5rem 1.5rem 2rem;
   box-shadow: var(--shadow);
@@ -229,13 +286,37 @@ section {
   cursor: pointer;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
   outline: none;
+  background: url('https://stat.ameba.jp/user_images/20250310/23/migomigo7/fb/ff/j/o1000100015553203530.jpg') repeat-y center top/100% auto;
 }
 
 .meet-card:hover,
 .meet-card:focus-visible,
 .meet-card.is-focused {
   transform: translateY(-8px) rotate(-0.5deg);
-  box-shadow: 0 30px 60px -30px rgba(58, 46, 45, 0.6);
+  box-shadow: 0 30px 60px -30px rgba(51, 51, 51, 0.4);
+}
+
+.meet-card::before,
+.meet-card::after {
+  content: '';
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-color: var(--accent);
+  border-style: solid;
+  transition: all 0.3s ease;
+}
+
+.meet-card::before {
+  top: 1rem;
+  left: 1rem;
+  border-width: 2px 0 0 2px;
+}
+
+.meet-card::after {
+  bottom: 1rem;
+  right: 1rem;
+  border-width: 0 2px 2px 0;
 }
 
 .meet-card__image {
@@ -266,7 +347,7 @@ section {
   box-shadow: 0 18px 40px -24px rgba(58, 46, 45, 0.6);
   width: max-content;
   max-width: 280px;
-  font-family: 'Playfair Display', 'Yu Mincho', serif;
+  font-family: 'Noto Serif JP', serif;
   line-height: 1.6;
   
   opacity: 0;
@@ -298,6 +379,7 @@ section {
   gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   align-items: center;
+  text-align: left;
 }
 
 .access__map iframe {
@@ -310,10 +392,10 @@ section {
 
 .rsvp {
   text-align: center;
-  background: linear-gradient(135deg, rgba(232, 200, 255, 0.45), rgba(255, 240, 207, 0.5));
   padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 5vw, 3.2rem);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  background: url('https://stat.ameba.jp/user_images/20250310/23/migomigo7/36/9e/j/o1000100015553203526.jpg') repeat-y center top/100% auto;
 }
 
 .rsvp__button {
@@ -321,18 +403,18 @@ section {
   margin-top: 1rem;
   padding: 1rem 2.8rem;
   border-radius: 999px;
-  background: #fff;
-  color: var(--text);
+  background: var(--accent-strong);
+  color: #fff;
   font-weight: 600;
   text-decoration: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 18px 30px -25px rgba(58, 46, 45, 0.6);
+  box-shadow: 0 10px 25px -10px var(--accent-strong);
 }
 
 .rsvp__button:hover,
 .rsvp__button:focus-visible {
   transform: translateY(-4px);
-  box-shadow: 0 30px 50px -25px rgba(58, 46, 45, 0.6);
+  box-shadow: 0 18px 35px -15px var(--accent-strong);
 }
 
 .footer {
@@ -346,7 +428,7 @@ section {
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(232, 200, 255, 0.3) 0%, rgba(232, 200, 255, 0) 70%);
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
   pointer-events: none;
   mix-blend-mode: screen;
   transform: translate(-50%, -50%);
@@ -487,7 +569,7 @@ section {
 
 /* ===== Venue Card Background ===== */
 .intro__card--venue {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('images/会場.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/会場.jpg');
   background-size: cover;
   background-position: center;
   color: #fff;
@@ -495,6 +577,19 @@ section {
 
 .intro__card--venue h2,
 .intro__card--venue p {
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
 }
 /* =============================== */
+
+/* ===== Keyframe Animations ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ============================= */
