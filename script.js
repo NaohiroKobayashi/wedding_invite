@@ -14,36 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- Photo Modal Logic ---
-  const modal = document.querySelector('.photo-modal');
-  if (modal) {
-    const modalImage = modal.querySelector('.photo-modal__content img');
-    const closeModalButton = modal.querySelector('.photo-modal__close');
-    const backdrop = modal.querySelector('.photo-modal__backdrop');
-    const tappableImages = document.querySelectorAll('.meet-card__image');
-
-    const openModal = (imgSrc) => {
-      modalImage.setAttribute('src', imgSrc);
-      modal.classList.add('is-visible');
-      document.body.classList.add('modal-is-open');
-    };
-
-    const closeModal = () => {
-      modal.classList.remove('is-visible');
-      document.body.classList.remove('modal-is-open');
-    };
-
-    tappableImages.forEach((imgContainer) => {
-      imgContainer.addEventListener('click', () => {
-        const imgSrc = imgContainer.querySelector('img').getAttribute('src');
-        openModal(imgSrc);
-      });
-    });
-
-    closeModalButton.addEventListener('click', closeModal);
-    backdrop.addEventListener('click', closeModal);
-  }
-
   // --- Confetti on Page Load ---
   if (typeof confetti === 'function') {
     const duration = 3 * 1000; // Animation duration in milliseconds
